@@ -1,21 +1,21 @@
 # FaBo7Seg-TLC59208-Library
 
-# FaBo7Seg
+## FaBo 7Seg
 
-This is a library for FaBo Proximity Brick.
+This is a library for FaBo 7Seg Brick.
 
-# TLC59208
+## TLC59208
 
-TLC59208 is 7seg controller.
+8-Bit I2C Bus LED Driver
 
-# Datasheet
+## Datasheet
 
 [TLC59208 Datasheet](http://www.ti.com/lit/ds/symlink/tlc59208f.pdf)
 
-# Releases
+## Releases
 
 1.0.0 Initial release.
 
-# How to install.
+## How to install
 
 [Installing Additional Arduino Libraries](https://www.arduino.cc/en/Guide/Libraries#toc3)

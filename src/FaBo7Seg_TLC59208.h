@@ -54,7 +54,8 @@ class FaBo7Seg_TLC59208 {
     FaBo7Seg_TLC59208(uint8_t addr1, uint8_t addr2);
     FaBo7Seg_TLC59208(uint8_t addr1, uint8_t addr2, uint8_t addr3);
     FaBo7Seg_TLC59208(uint8_t addr1, uint8_t addr2, uint8_t addr3, uint8_t addr4);
-    void init(void);
+    bool searchDevice(void);
+    void configure(void);
     void showNumber(uint8_t number, uint8_t digit = 0);
     void clearNumber(uint8_t digit = 0);
     void showNumberFullDigit(unsigned int number);
@@ -64,6 +65,7 @@ class FaBo7Seg_TLC59208 {
   private:
     uint8_t _i2caddr[4];
     uint8_t _digits;
+    bool checkI2c(uint8_t address);
     void writeI2c(uint8_t address, uint8_t data);
 };
 

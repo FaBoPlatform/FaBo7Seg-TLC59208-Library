@@ -11,7 +11,14 @@ FaBo7Seg_TLC59208 fabo_7seg;
 
 void setup() {
   // デバイス初期化
-  fabo_7seg.init();
+  Serial.println("Checking I2C device...");
+  if (fabo_7seg.searchDevice()) {
+    Serial.println("configuring 7Seg TLC59208");
+    fabo_7seg.configure();
+  } else {
+    Serial.println("device error");
+    while(1);
+  }
 }
 
 void loop() {

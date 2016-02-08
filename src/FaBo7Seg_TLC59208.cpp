@@ -30,7 +30,16 @@ FaBo7Seg_TLC59208::FaBo7Seg_TLC59208(uint8_t addr1, uint8_t addr2, uint8_t addr3
   Wire.begin();
 }
 
-void FaBo7Seg_TLC59208::init(void) {
+bool FaBo7Seg_TLC59208::searchDevice(void) {
+  int i;
+  uint8_t ret;
+  for (i=0; i<_digits; i++) {
+    ret &= checkI2c(_i2caddr[i]);
+  }
+  return ret;
+}
+
+void FaBo7Seg_TLC59208::configure(void) {
   int i;
   for (i=0; i<_digits; i++) {
     Wire.beginTransmission(_i2caddr[i]);
@@ -130,6 +139,11 @@ void FaBo7Seg_TLC59208::showPattern(uint8_t data, uint8_t digit) {
 }
 
 ////////////////////////////////////////////////////////////////
+
+bool FaBo7Seg_TLC59208::checkI2c(uint8_t address) {
+  Wire.beginTransmission(address);
+  return !(Wire.endTransmission());
+}
 
 void FaBo7Seg_TLC59208::writeI2c(uint8_t address, uint8_t data) {
   int i;

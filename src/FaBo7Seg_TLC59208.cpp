@@ -1,3 +1,15 @@
+/*************************************************** 
+ This is a library for the FaBo 7Seg I2C Brick.
+
+  http://fabo.io/211.html
+
+ author:FaBo<info@fabo.io>
+ maintainer:Hideki Yamauchi<yamauchi@fabo.io>
+
+ Released under APACHE LICENSE, VERSION 2.0
+  http://www.apache.org/licenses/
+ ****************************************************/
+
 #include "FaBo7Seg_TLC59208.h"
 
 FaBo7Seg_TLC59208::FaBo7Seg_TLC59208(uint8_t addr) {
@@ -30,17 +42,9 @@ FaBo7Seg_TLC59208::FaBo7Seg_TLC59208(uint8_t addr1, uint8_t addr2, uint8_t addr3
   Wire.begin();
 }
 
-bool FaBo7Seg_TLC59208::searchDevice(void) {
-  int i;
-  uint8_t ret;
-  for (i=0; i<_digits; i++) {
-    ret &= checkI2c(_i2caddr[i]);
-  }
-  return ret;
-}
-
-void FaBo7Seg_TLC59208::configure(void) {
-  int i;
+bool FaBo7Seg_TLC59208::configure(void) {
+  uint8_t i;
+  uint8_t ret = 1;
   for (i=0; i<_digits; i++) {
     Wire.beginTransmission(_i2caddr[i]);
     Wire.write(0x80); // Control: Auto-Increment on All Registers
@@ -62,8 +66,9 @@ void FaBo7Seg_TLC59208::configure(void) {
     Wire.write(0x94); // 0Fh: SUBADR2
     Wire.write(0x98); // 10h: SUBADR3
     Wire.write(0xD0); // 11h: ALLCALLADR
-    Wire.endTransmission();
+    ret &= ! Wire.endTransmission();
   }
+  return ret;
 }
 
 void FaBo7Seg_TLC59208::showNumber(uint8_t number, uint8_t digit) {
@@ -108,8 +113,8 @@ void FaBo7Seg_TLC59208::clearNumber(uint8_t digit) {
   writeI2c(_i2caddr[digit], TLC59208_LED_OFF);
 }
 
-void FaBo7Seg_TLC59208::showNumberFullDigit(unsigned int number) {
-  int i;
+void FaBo7Seg_TLC59208::showNumberFullDigit(uint8_t number) {
+  uint8_t i;
   for (i=0; i<_digits; i++) {
     if (number <= 0) {
       clearNumber(i);
@@ -140,13 +145,8 @@ void FaBo7Seg_TLC59208::showPattern(uint8_t data, uint8_t digit) {
 
 ////////////////////////////////////////////////////////////////
 
-bool FaBo7Seg_TLC59208::checkI2c(uint8_t address) {
-  Wire.beginTransmission(address);
-  return !(Wire.endTransmission());
-}
-
 void FaBo7Seg_TLC59208::writeI2c(uint8_t address, uint8_t data) {
-  int i;
+  uint8_t i;
   Wire.beginTransmission(address);
   Wire.write(0xA2);// Control: Auto-Increment on PWM Registers
   for (i=0; i<8; i++) {

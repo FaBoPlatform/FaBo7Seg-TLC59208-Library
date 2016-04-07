@@ -12,7 +12,6 @@ FaBo7Seg_TLC59208	KEYWORD1
 # Methods and Functions (KEYWORD2)
 #######################################	
 
-searchDevice	KEYWORD2
 configure	KEYWORD2
 showNumber	KEYWORD2
 clearNumber	KEYWORD2

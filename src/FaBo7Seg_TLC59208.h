@@ -1,3 +1,15 @@
+/*************************************************** 
+ This is a library for the FaBo 7Seg I2C Brick.
+
+  http://fabo.io/211.html
+
+ author:FaBo<info@fabo.io>
+ maintainer:Hideki Yamauchi<yamauchi@fabo.io>
+
+ Released under APACHE LICENSE, VERSION 2.0
+  http://www.apache.org/licenses/
+ ****************************************************/
+
 #ifndef FABO7SEG_TLC59208_H
 #define FABO7SEG_TLC59208_H
 
@@ -54,18 +66,16 @@ class FaBo7Seg_TLC59208 {
     FaBo7Seg_TLC59208(uint8_t addr1, uint8_t addr2);
     FaBo7Seg_TLC59208(uint8_t addr1, uint8_t addr2, uint8_t addr3);
     FaBo7Seg_TLC59208(uint8_t addr1, uint8_t addr2, uint8_t addr3, uint8_t addr4);
-    bool searchDevice(void);
-    void configure(void);
+    bool configure(void);
     void showNumber(uint8_t number, uint8_t digit = 0);
     void clearNumber(uint8_t digit = 0);
-    void showNumberFullDigit(unsigned int number);
+    void showNumberFullDigit(uint8_t number);
     void showDot(uint8_t digit = 0);
     void clearDot(uint8_t digit = 0);
     void showPattern(uint8_t data, uint8_t digit = 0);
   private:
     uint8_t _i2caddr[4];
     uint8_t _digits;
-    bool checkI2c(uint8_t address);
     void writeI2c(uint8_t address, uint8_t data);
 };
 

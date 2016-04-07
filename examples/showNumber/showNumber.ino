@@ -1,8 +1,14 @@
-//
-// FaBo Brick Example
-//
-// FaBo 7Seg TLC59208
-//
+/*************************************************** 
+ This is an Example for the FaBo 7Seg I2C Brick.
+
+  http://fabo.io/211.html
+
+ author:FaBo<info@fabo.io>
+ maintainer:Hideki Yamauchi<yamauchi@fabo.io>
+
+ Released under APACHE LICENSE, VERSION 2.0
+  http://www.apache.org/licenses/
+ ****************************************************/
 
 #include <Wire.h>
 #include <FaBo7Seg_TLC59208.h>
@@ -10,15 +16,13 @@
 FaBo7Seg_TLC59208 fabo_7seg;
 
 void setup() {
-  Serial.begin(9600); // シリアルの開始
-  Serial.println();
+  Serial.begin(9600);
   Serial.println("RESET");
+  Serial.println();
 
-  // デバイス初期化
-  Serial.println("Checking I2C device...");
-  if (fabo_7seg.searchDevice()) {
-    Serial.println("configuring 7Seg TLC59208");
-    fabo_7seg.configure();
+  Serial.println("configuring device.");
+  if (fabo_7seg.configure()) {
+    Serial.println("configured FaBo 7Seg Brick");
   } else {
     Serial.println("device error");
     while(1);
@@ -27,8 +31,7 @@ void setup() {
 
 void loop() {
   for (int i = 0; i<10; i++) {
-    Serial.println(i);
-    fabo_7seg.showNumber(i); // 0〜9を順番に表示
-    delay(500);
+    fabo_7seg.showNumber(i); // show a number
+    delay(1000);
   }
 }

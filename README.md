@@ -1,14 +1,16 @@
 # FaBo7Seg-TLC59208-Library
 
-## FaBo 7Seg
+This is a library for the FaBo 7Seg I2C Brick.
 
-This is a library for FaBo 7Seg Brick.
+## FaBo 7Seg I2C Brick
+
+[#211 7Segment LED I2C Brick](http://fabo.io/211.html)
 
 ## TLC59208
 
 8-Bit I2C Bus LED Driver
 
-## Datasheet
+### Datasheet
 
 [TLC59208 Datasheet](http://www.ti.com/lit/ds/symlink/tlc59208f.pdf)
 

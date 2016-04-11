@@ -16,8 +16,8 @@ This is a library for the FaBo #211 7Segment LED I2C Brick.
 
 ## Releases
 
-1.0.0 Initial release.
-1.0.1 minor fix.
+- 1.0.0 Initial release.
+- 1.0.1 minor fix.
 
 ## How to install
 

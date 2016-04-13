@@ -14,8 +14,9 @@
 #include "FaBo7Seg_TLC59208.h"
 
 /**
- * @brief Constructor
- */
+ @brief コンストラクタ
+ @param [in] addr I2C Slaveアドレスを指定
+*/
 FaBo7Seg_TLC59208::FaBo7Seg_TLC59208(uint8_t addr) {
   _i2caddr[0] = addr;
   _digits = 1;
@@ -23,8 +24,11 @@ FaBo7Seg_TLC59208::FaBo7Seg_TLC59208(uint8_t addr) {
 }
 
 /**
- * @brief Constructor
- */
+ @brief コンストラクタ
+  7Seg I2C Brickを2個接続する場合
+ @param [in] addr1 1個目のI2C Slaveアドレスを指定
+ @param [in] addr2 2個目のI2C Slaveアドレスを指定
+*/
 FaBo7Seg_TLC59208::FaBo7Seg_TLC59208(uint8_t addr1, uint8_t addr2) {
   _i2caddr[0] = addr1;
   _i2caddr[1] = addr2;
@@ -33,8 +37,12 @@ FaBo7Seg_TLC59208::FaBo7Seg_TLC59208(uint8_t addr1, uint8_t addr2) {
 }
 
 /**
- * @brief Constructor
- */
+ @brief コンストラクタ
+  7Seg I2C Brickを3個接続する場合
+ @param [in] addr1 1個目のI2C Slaveアドレスを指定
+ @param [in] addr2 2個目のI2C Slaveアドレスを指定
+ @param [in] addr3 3個目のI2C Slaveアドレスを指定
+*/
 FaBo7Seg_TLC59208::FaBo7Seg_TLC59208(uint8_t addr1, uint8_t addr2, uint8_t addr3) {
   _i2caddr[0] = addr1;
   _i2caddr[1] = addr2;
@@ -44,8 +52,13 @@ FaBo7Seg_TLC59208::FaBo7Seg_TLC59208(uint8_t addr1, uint8_t addr2, uint8_t addr3
 }
 
 /**
- * @brief Constructor
- */
+ @brief コンストラクタ
+  7Seg I2C Brickを4個接続する場合
+ @param [in] addr1 1個目のI2C Slaveアドレスを指定
+ @param [in] addr2 2個目のI2C Slaveアドレスを指定
+ @param [in] addr3 3個目のI2C Slaveアドレスを指定
+ @param [in] addr4 4個目のI2C Slaveアドレスを指定
+*/
 FaBo7Seg_TLC59208::FaBo7Seg_TLC59208(uint8_t addr1, uint8_t addr2, uint8_t addr3, uint8_t addr4) {
   _i2caddr[0] = addr1;
   _i2caddr[1] = addr2;
@@ -57,8 +70,8 @@ FaBo7Seg_TLC59208::FaBo7Seg_TLC59208(uint8_t addr1, uint8_t addr2, uint8_t addr3
 
 /**
  * @brief Configuring TLC59208F Device
- * @retval true  : normaly done
- * @retval false : device error
+ * @retval true normaly done
+ * @retval false device error
  */
 bool FaBo7Seg_TLC59208::configure(void) {
   uint8_t i;
@@ -91,8 +104,8 @@ bool FaBo7Seg_TLC59208::configure(void) {
 
 /**
  * @brief show a number
- * @param [in] number : show number
- * @param [in] digit : digit number
+ * @param [in] number show number
+ * @param [in] digit digit number
  */
 void FaBo7Seg_TLC59208::showNumber(uint8_t number, uint8_t digit) {
   switch (number) {
@@ -134,7 +147,7 @@ void FaBo7Seg_TLC59208::showNumber(uint8_t number, uint8_t digit) {
 
 /**
  * @brief led off
- * @param [in] digit : digit number
+ * @param [in] digit digit number
  */
 void FaBo7Seg_TLC59208::clearNumber(uint8_t digit) {
   writeI2c(_i2caddr[digit], TLC59208_LED_OFF);
@@ -142,7 +155,7 @@ void FaBo7Seg_TLC59208::clearNumber(uint8_t digit) {
 
 /**
  * @brief show a number use full digit
- * @param [in] number : show number
+ * @param [in] number show number
  */
 void FaBo7Seg_TLC59208::showNumberFullDigit(uint8_t number) {
   uint8_t i;
@@ -158,7 +171,7 @@ void FaBo7Seg_TLC59208::showNumberFullDigit(uint8_t number) {
 
 /**
  * @brief show dot
- * @param [in] digit : digit number
+ * @param [in] digit digit number
  */
 void FaBo7Seg_TLC59208::showDot(uint8_t digit) {
   Wire.beginTransmission(_i2caddr[digit]);
@@ -169,7 +182,7 @@ void FaBo7Seg_TLC59208::showDot(uint8_t digit) {
 
 /**
  * @brief off dot
- * @param [in] digit : digit number
+ * @param [in] digit digit number
  */
 void FaBo7Seg_TLC59208::clearDot(uint8_t digit) {
   Wire.beginTransmission(_i2caddr[digit]);
@@ -180,8 +193,8 @@ void FaBo7Seg_TLC59208::clearDot(uint8_t digit) {
 
 /**
  * @brief show pattern
- * @param [in] data : pattern data
- * @param [in] digit : digit number
+ * @param [in] data pattern data
+ * @param [in] digit digit number
  */
 void FaBo7Seg_TLC59208::showPattern(uint8_t data, uint8_t digit) {
   writeI2c(_i2caddr[digit], data);
@@ -191,8 +204,8 @@ void FaBo7Seg_TLC59208::showPattern(uint8_t data, uint8_t digit) {
 
 /**
  * @brief write I2C
- * @param [in] data : data
- * @param [in] address : register address
+ * @param [in] data data
+ * @param [in] address register address
  */
 void FaBo7Seg_TLC59208::writeI2c(uint8_t address, uint8_t data) {
   uint8_t i;

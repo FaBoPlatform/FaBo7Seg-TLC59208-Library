@@ -48,7 +48,7 @@
 /// @}
 
 /// @name LED点灯パターン3
-/// LED点灯パターン定義(そのた)
+/// LED点灯パターン定義(ドット,消灯)
 /// @{
 #define TLC59208_LED_DP 0x08 ///< Dot
 #define TLC59208_LED_OFF 0x00 ///< OFF
@@ -66,7 +66,7 @@
 #define TLC59208_LED_PWM7 0x80
 /// @}
 
-/// @name 7Segment PIN assign
+/// @name 7Segment LED PINアサイン定義
 /// @{
 #define TLC59208_LED_PIN_A 0x20
 #define TLC59208_LED_PIN_B 0x10

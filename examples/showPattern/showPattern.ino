@@ -1,14 +1,15 @@
-/*************************************************** 
- This is an Example for the FaBo 7Seg I2C Brick.
+/**
+ @file showPattern.ino
+ @brief This is an Example for the FaBo 7Seg I2C Brick.
 
-  http://fabo.io/211.html
+   http://fabo.io/211.html
 
- author:FaBo<info@fabo.io>
- maintainer:Hideki Yamauchi<yamauchi@fabo.io>
+   Released under APACHE LICENSE, VERSION 2.0
 
- Released under APACHE LICENSE, VERSION 2.0
-  http://www.apache.org/licenses/
- ****************************************************/
+   http://www.apache.org/licenses/
+
+ @author FaBo<info@fabo.io>
+*/
 
 #include <Wire.h>
 #include <FaBo7Seg_TLC59208.h>

@@ -1,23 +1,30 @@
-/*************************************************** 
- This is a library for the FaBo 7Seg I2C Brick.
+/**
+ @file FaBo7Seg_TLC59208.cpp
+ @brief This is a library for the FaBo 7Seg I2C Brick.
 
-  http://fabo.io/211.html
+   http://fabo.io/211.html
 
- author:FaBo<info@fabo.io>
- maintainer:Hideki Yamauchi<yamauchi@fabo.io>
+   Released under APACHE LICENSE, VERSION 2.0
 
- Released under APACHE LICENSE, VERSION 2.0
-  http://www.apache.org/licenses/
- ****************************************************/
+   http://www.apache.org/licenses/
+
+ @author FaBo<info@fabo.io>
+*/
 
 #include "FaBo7Seg_TLC59208.h"
 
+/**
+ * @brief Constructor
+ */
 FaBo7Seg_TLC59208::FaBo7Seg_TLC59208(uint8_t addr) {
   _i2caddr[0] = addr;
   _digits = 1;
   Wire.begin();
 }
 
+/**
+ * @brief Constructor
+ */
 FaBo7Seg_TLC59208::FaBo7Seg_TLC59208(uint8_t addr1, uint8_t addr2) {
   _i2caddr[0] = addr1;
   _i2caddr[1] = addr2;
@@ -25,6 +32,9 @@ FaBo7Seg_TLC59208::FaBo7Seg_TLC59208(uint8_t addr1, uint8_t addr2) {
   Wire.begin();
 }
 
+/**
+ * @brief Constructor
+ */
 FaBo7Seg_TLC59208::FaBo7Seg_TLC59208(uint8_t addr1, uint8_t addr2, uint8_t addr3) {
   _i2caddr[0] = addr1;
   _i2caddr[1] = addr2;
@@ -33,6 +43,9 @@ FaBo7Seg_TLC59208::FaBo7Seg_TLC59208(uint8_t addr1, uint8_t addr2, uint8_t addr3
   Wire.begin();
 }
 
+/**
+ * @brief Constructor
+ */
 FaBo7Seg_TLC59208::FaBo7Seg_TLC59208(uint8_t addr1, uint8_t addr2, uint8_t addr3, uint8_t addr4) {
   _i2caddr[0] = addr1;
   _i2caddr[1] = addr2;
@@ -42,6 +55,11 @@ FaBo7Seg_TLC59208::FaBo7Seg_TLC59208(uint8_t addr1, uint8_t addr2, uint8_t addr3
   Wire.begin();
 }
 
+/**
+ * @brief Configuring TLC59208F Device
+ * @retval true  : normaly done
+ * @retval false : device error
+ */
 bool FaBo7Seg_TLC59208::configure(void) {
   uint8_t i;
   uint8_t ret = 1;
@@ -71,6 +89,11 @@ bool FaBo7Seg_TLC59208::configure(void) {
   return ret;
 }
 
+/**
+ * @brief show a number
+ * @param [in] number : show number
+ * @param [in] digit : digit number
+ */
 void FaBo7Seg_TLC59208::showNumber(uint8_t number, uint8_t digit) {
   switch (number) {
     case 0:
@@ -109,10 +132,18 @@ void FaBo7Seg_TLC59208::showNumber(uint8_t number, uint8_t digit) {
   }
 }
 
+/**
+ * @brief led off
+ * @param [in] digit : digit number
+ */
 void FaBo7Seg_TLC59208::clearNumber(uint8_t digit) {
   writeI2c(_i2caddr[digit], TLC59208_LED_OFF);
 }
 
+/**
+ * @brief show a number use full digit
+ * @param [in] number : show number
+ */
 void FaBo7Seg_TLC59208::showNumberFullDigit(uint8_t number) {
   uint8_t i;
   for (i=0; i<_digits; i++) {
@@ -125,6 +156,10 @@ void FaBo7Seg_TLC59208::showNumberFullDigit(uint8_t number) {
   }
 }
 
+/**
+ * @brief show dot
+ * @param [in] digit : digit number
+ */
 void FaBo7Seg_TLC59208::showDot(uint8_t digit) {
   Wire.beginTransmission(_i2caddr[digit]);
   Wire.write(0x05); // set only PWM3
@@ -132,6 +167,10 @@ void FaBo7Seg_TLC59208::showDot(uint8_t digit) {
   Wire.endTransmission();
 }
 
+/**
+ * @brief off dot
+ * @param [in] digit : digit number
+ */
 void FaBo7Seg_TLC59208::clearDot(uint8_t digit) {
   Wire.beginTransmission(_i2caddr[digit]);
   Wire.write(0x05); // set only PWM3
@@ -139,12 +178,22 @@ void FaBo7Seg_TLC59208::clearDot(uint8_t digit) {
   Wire.endTransmission();
 }
 
+/**
+ * @brief show pattern
+ * @param [in] data : pattern data
+ * @param [in] digit : digit number
+ */
 void FaBo7Seg_TLC59208::showPattern(uint8_t data, uint8_t digit) {
   writeI2c(_i2caddr[digit], data);
 }
 
 ////////////////////////////////////////////////////////////////
 
+/**
+ * @brief write I2C
+ * @param [in] data : data
+ * @param [in] address : register address
+ */
 void FaBo7Seg_TLC59208::writeI2c(uint8_t address, uint8_t data) {
   uint8_t i;
   Wire.beginTransmission(address);

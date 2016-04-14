@@ -22,4 +22,4 @@ This is a library for the FaBo #211 7Segment LED I2C Brick.
 
 ## How to install
 
-[Installing Additional Arduino Libraries](https://www.arduino.cc/en/Guide/Libraries#toc3)
+[Installing Additional Arduino Libraries](https://www.arduino.cc/en/Guide/Libraries)
